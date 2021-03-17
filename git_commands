@@ -1,0 +1,29 @@
+git config --global user.name "Test test" - имя в подписи, от которой будут падать коммиты
+git config --global user.email "test@test.com" - почта в подписи, от которой будут падать коммиты
+git config -l - просмотр подписи
+git init . - инициализация гит в папке проекта
+git add * - добавить все файлы в коммит
+git status - проверить статус файлов / папок
+git commit -m "my commit v1.0" - сделать коммит в локальном репозиторие
+git log - лог изменений
+git log -p -1 - последнее изменение в логе с обозначением самих изменений
+git diff --staged - изменения после git add, которые будут записаны в git log
+git checkout --file.txt - вернуть изменения в файле
+git clone https://github.com/test/test.git - клонирование репозотория по https
+git push origin - коммит локал репозитори в гитхаб
+git remote -v - проверка ссылки на репозиторий гитхаба
+git remote set-url orgin git@github.com:test/test.git - замена https ссылки на ssh пуш в гитхаб
+git branch test - создать ветку test
+git checkout test - перейти на ветку test
+git checkout -b test - создать test и сразу перейти в нее
+git checkout master - перейти в мастер
+git merge test - объкдинить ветку тест с мастер
+git branch -d test - удалить ветку test
+git branch -D test - удалить ветку test (даже если в ней имеются изменения)
+git checkout 45hg56jkkjhd7428ulkgns6545 - вернуться на изменения по значению хеш коммита (получить хеш можно с пом git log)
+git checkout master - вернуться к последним изменениям в мастер
+git reset --hard HEAD~2 - удалить первые 2 коммита
+git reset --soft HEAD~3 - удалить с истории первые 3 коммита
+git commit --amend - внести изменения в коммит без дополнительного коммита
+git push origin --delete den_branch - удалить ветку с гитхаба
+

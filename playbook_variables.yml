@@ -1,0 +1,43 @@
+
+---
+- name: Playbook with variables
+  hosts: Cent7
+  become: yes
+
+  vars:
+          message1: Hello
+          message2: World
+          secret: secret_key_100500
+
+  tasks:
+          - name: Print secret variable
+            debug:
+                  var: secret
+
+          - debug:
+                  msg: "Secret word {{ secret }}"
+
+          - debug:
+                  msg: "the owner of the server -->{{ owner }}<--"
+
+          - set_fact: full_message="{{ message1 }} {{ message2 }} from {{ owner }}"
+
+          - debug:
+                  var: full_message
+
+          - debug:
+                  var: ansible_distribution
+          
+          # output of shell command uptime writes to the results
+          - shell: uptime
+            register: results
+
+          - debug:
+                  var: results
+
+          - debug:
+                  var: results.stdout
+...
+
+
+

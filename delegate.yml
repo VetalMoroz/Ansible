@@ -1,0 +1,30 @@
+
+---
+# this playbook takes a reload grup of servers and delegated to wait in localhost, untill servers will start
+- name: delegate playbook
+  hosts: ALL
+  become: yes
+
+  vars:
+    test1: "Hello_test1"
+
+  tasks:
+  - name: ping test
+    ping:
+
+    name: Unregister server from load balancer
+    shell: echo This server {{ inventory_hostname }} was deregistered from our load balancer, node name is {{ ansible_nodename }} >> /home/log.txt
+    delegate_to: 127.0.0.1
+
+  - naame: reboot servers
+    shell: sleep 3 && reboot now
+    async: 1
+    poll: 0
+
+  - name: wait till my server will come up online
+    wait_for:
+    - host: "{{ inventory_hostname }}"
+      state: started
+      delay: 5
+      timeout: 40
+    delegate_to: 127.0.0.1

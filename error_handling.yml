@@ -1,0 +1,19 @@
+
+---
+- name: lesson 19
+  hosts: ALL
+  become: yes
+
+  tasks:
+  - name: task 1
+    yum: name=treeeeee state=latest
+    ignore_errors: yes
+            
+  - name: task 3
+    shell: echo task 3 ends!
+
+  - name: task 4
+    shell: echo Hello World!
+    register: results
+    failed_when: results.rc ==0
+    #failed_when: "'world' in results.stdout"

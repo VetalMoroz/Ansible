@@ -1,0 +1,24 @@
+
+---
+- name: Remove default Apache Web Server from Debian and RedHat (CentOS)
+  hosts: ALL
+  become: yes
+
+  tasks:
+          - name: Check and Print OS family
+            debug: var=ansible_os_family
+
+          - block:
+
+                  - name: Remove Apache Web Server from RedHat
+                    yum: name=httpd state=absent
+
+            when: ansible_os_family == "RedHat"
+
+          - block:
+
+                  - name: Remove Apache Web Server from Debian
+                    apt: name=apache2 state=absent
+
+            when: ansible_os_family == "Debian"
+...

@@ -1,0 +1,29 @@
+ansible-inventory --graph - граф серверов
+ansible-inventory --list - список серверов и их групп
+ansible <group> -m ping - пинг группы серверов
+ansible <group> -m setup - обширная информаци по группе серверов
+ansible <group> -m shell -a "uptime" - запуск шелл комманд на линукс машинах
+ansible <group> -m command -a "uptime" - запуск не через shell, как рез-тат не работаюа переменные среды и часть символов (< > | etc.) (более секурный вариант)
+ansible <group> -m copy -a "src=test.txt dest=/home/ mode=777" -b - копирование файла на все хосты (b = sudo, mode - права на файл)
+ansible <group> -m file -a "path=/home/test.txt state=absent" -b - удаление файла test
+ansible <group> -m get_url -a "url=https://test.com/home/test.txt dest=/home/" -b - загрузка файла на сервер по урлу
+ansible <group> -m yum -a "name=stress state=installed" -b - установка программы stress
+ansible <group> -m yum -a "name=stress state=removed" -b - удаление программы stress
+ansible <group> -m uri -a "url=https://esputnik.com" проверить ресурс по ссылке
+ansible <group> -m uri -a "url=https://esputnik.com return_content=yes" получить ресурс по ссылке
+ansible <group> -m yum -a "name=httpd state=latest" -b - установить apache на инстансы
+ansible <group> -m service -a "name=httpd state=started enable=yes" -b запустить apache + установить, чтобы сервер запускался после включения хоста
+добавление -v - -vvvvv (от 1 до 5(6)) verbose - более детальные логи падают после выполнения команды, для дебага
+ansible-doc -l | grep docker - вся документация по ансиблу + фильтр по докеру
+
+ansible-playbook playbook6.yml --extra-var "HOSTS=ALL" - указывает внеш. переменную в плейбуке, после объявляем ее в при запуске плейбука
+ansible-vault create test.txt
+ansible-vault view test.txt
+ansible-vault edit test.txt
+ansible-vault rekey test.txt
+ansible-vault encrypt test.txt
+ansible-vault decrypt test.txt
+ansible-playbook test.yml --ask-vault-pass
+ansible-playbook test.yml --vault-password-file key.txt
+ansible-vault encrypt_string
+acho -n "secretword" | ansible-vault encrypt_string
